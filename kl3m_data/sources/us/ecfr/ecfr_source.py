@@ -68,8 +68,7 @@ class ECFRSource(BaseSource):
         self.client = httpx.Client(
             http1=True,
             http2=True,
-            verify=False,
-            follow_redirects=True,
+            verify=True, follow_redirects=True,
             limits=get_httpx_limits(),
             timeout=get_httpx_timeout(read_timeout=60 * 5),
             headers=get_default_headers(),
