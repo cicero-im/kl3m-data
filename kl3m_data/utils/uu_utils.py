@@ -62,7 +62,7 @@ def uudecode(input_buffer: Union[str, bytes, BinaryIO]) -> tuple[str, bytes]:
         input_buffer = io.BytesIO(input_buffer)
 
     # read the header
-    header = input_buffer.readline().decode()
+    header = input_buffer.readline(5_000_000).decode()
     if not header.startswith("begin "):
         raise ValueError("Invalid uuencoded input")
 
@@ -72,7 +72,7 @@ def uudecode(input_buffer: Union[str, bytes, BinaryIO]) -> tuple[str, bytes]:
     # read the data
     data = b""
     while True:
-        line = input_buffer.readline().decode()
+        line = input_buffer.readline(5_000_000).decode()
         if line == "end\n":
             break
         try:
