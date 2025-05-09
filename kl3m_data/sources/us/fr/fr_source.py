@@ -144,7 +144,7 @@ class FRSource(BaseSource):
 
         # initialize the transformer
         self.stylesheet_transformer = lxml.etree.XSLT(
-            lxml.etree.fromstring(STYLESHEET_PATH.read_bytes())
+            lxml.etree.fromstring(STYLESHEET_PATH.read_bytes(), parser=lxml.etree.XMLParser(resolve_entities=False))
         )
 
     def __exit__(self, exc_type, exc_val, exc_tb):

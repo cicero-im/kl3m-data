@@ -47,7 +47,7 @@ def parse(
 
     # try to parse and nicely format the xml
     try:
-        xml_doc = lxml.etree.fromstring(content)
+        xml_doc = lxml.etree.fromstring(content, parser=lxml.etree.XMLParser(resolve_entities=False))
         representations["application/xml"] = ParsedDocumentRepresentation(
             content=lxml.etree.tostring(
                 xml_doc, method="xml", pretty_print=True
