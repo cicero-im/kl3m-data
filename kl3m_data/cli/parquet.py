@@ -4,7 +4,6 @@
 import argparse
 import gzip
 import json
-import random
 from typing import Callable, Generator, Optional
 
 # packages
@@ -27,6 +26,7 @@ from kl3m_data.utils.s3_utils import (
     get_object_bytes,
 )
 from kl3m_data.logger import LOGGER
+import secrets
 
 
 def convert_dataset(
@@ -167,7 +167,7 @@ def get_sample_batch(
         index_objects.extend(index_data.get("objects", []))
 
     if shuffle:
-        random.shuffle(index_objects)
+        secrets.SystemRandom().shuffle(index_objects)
 
     # iterate objects
     total = 0
