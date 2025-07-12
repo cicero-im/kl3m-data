@@ -125,8 +125,7 @@ class BaseSource(abc.ABC):
         return httpx.Client(
             http1=True,
             http2=True,
-            verify=False,
-            follow_redirects=True,
+            verify=True, follow_redirects=True,
             limits=get_httpx_limits(),
             timeout=get_httpx_timeout(),
             headers=get_default_headers(),
@@ -142,8 +141,7 @@ class BaseSource(abc.ABC):
         return httpx.AsyncClient(
             http1=True,
             http2=True,
-            verify=False,
-            follow_redirects=True,
+            verify=True, follow_redirects=True,
             limits=get_httpx_limits(),
             timeout=get_httpx_timeout(),
             headers=get_default_headers(),
