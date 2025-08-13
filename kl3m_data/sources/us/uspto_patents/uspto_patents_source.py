@@ -456,7 +456,7 @@ class USPTOPatentSource(BaseSource):
             # parse the segment
             try:
                 # parse it
-                patent_record = lxml.etree.fromstring(xml_buffer[p0:p1])
+                patent_record = lxml.etree.fromstring(xml_buffer[p0:p1], parser=lxml.etree.XMLParser(resolve_entities=False))
                 record: dict[str, Any] = {
                     "title": None,
                     "abstract": None,

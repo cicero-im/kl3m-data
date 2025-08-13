@@ -469,7 +469,7 @@ class BaseSource(abc.ABC):
         Returns:
             lxml.etree.Element: XML response content.
         """
-        return lxml.etree.fromstring(self._get(url=url, params=params, headers=headers))
+        return lxml.etree.fromstring(self._get(url=url, params=params, headers=headers), parser=lxml.etree.XMLParser(resolve_entities=False))
 
     def _post_xml(
         self,
@@ -494,8 +494,8 @@ class BaseSource(abc.ABC):
         return lxml.etree.fromstring(
             self._post(
                 url=url, data=data, json_data=json_data, params=params, headers=headers
-            )
-        )
+            ), 
+        parser=lxml.etree.XMLParser(resolve_entities=False))
 
     def check_id(self, document_id: int | str) -> bool:
         """

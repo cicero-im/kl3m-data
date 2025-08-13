@@ -19,7 +19,7 @@ from kl3m_data.parsers.parser_types import ParsedDocument
 
 # load the XSL transformer
 EU_OJ_XSL = lxml.etree.XSLT(
-    lxml.etree.parse(Path(__file__).parent / "xsl" / "eu_oj.xsl")
+    lxml.etree.parse(Path(__file__).parent / "xsl" / "eu_oj.xsl", parser=lxml.etree.XMLParser(resolve_entities=False))
 )
 
 
@@ -43,7 +43,7 @@ def parse(
 
     # try to parse and nicely format the xml
     try:
-        xml_doc = lxml.etree.fromstring(content)
+        xml_doc = lxml.etree.fromstring(content, parser=lxml.etree.XMLParser(resolve_entities=False))
         html_doc = EU_OJ_XSL(xml_doc)
 
         return generic_html.parse(
